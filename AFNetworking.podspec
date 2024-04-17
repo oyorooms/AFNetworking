@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.watchos.pod_target_xcconfig = { 'PRODUCT_BUNDLE_IDENTIFIER' => 'com.alamofire.AFNetworking-watchOS' }
   s.tvos.pod_target_xcconfig = { 'PRODUCT_BUNDLE_IDENTIFIER' => 'com.alamofire.AFNetworking' }
 
-  s.source_files = 'AFNetworking/AFNetworking.h'
+  s.source_files = 'AFNetworking/AFNetworking.h',
     'AFNetworking/PrivacyInfo'
 
   s.subspec 'Serialization' do |ss|
