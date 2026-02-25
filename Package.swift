@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 //
 //  Package.swift
 //
@@ -25,13 +25,46 @@
 
 import PackageDescription
 
-let package = Package(name: "AFNetworking",
-                      platforms: [.macOS(.v10_10),
-                                  .iOS(.v9),
-                                  .tvOS(.v9),
-                                  .watchOS(.v2)],
-                      products: [.library(name: "AFNetworking",
-                                          targets: ["AFNetworking"])],
-                      targets: [.target(name: "AFNetworking",
-                                        path: "AFNetworking",
-                                        publicHeadersPath: "")])
+let package = Package(
+    name: "AFNetworking",
+    platforms: [
+        .macOS(.v10_10),
+        .iOS(.v9),
+        .tvOS(.v9),
+        .watchOS(.v2)
+    ],
+    products: [
+        .library(
+            name: "AFNetworking",
+            targets: ["AFNetworking"]
+        ),
+        .library(
+            name: "AFNetworkingUI",
+            targets: ["AFNetworkingUI"]
+        )
+    ],
+    targets: [
+        .target(
+            name: "AFNetworking",
+            path: "AFNetworking",
+            resources: [
+                .copy("../PrivacyInfo.xcprivacy")
+            ],
+            publicHeadersPath: ".",
+            cSettings: [
+                .headerSearchPath("."),
+                .define("AFNETWORKING_ALLOW_IMPORT", to: "1")
+            ]
+        ),
+        .target(
+            name: "AFNetworkingUI",
+            dependencies: ["AFNetworking"],
+            path: "UIKit+AFNetworking",
+            publicHeadersPath: ".",
+            cSettings: [
+                .headerSearchPath("."),
+                .define("AFNETWORKING_ALLOW_IMPORT", to: "1")
+            ]
+        )
+    ]
+)

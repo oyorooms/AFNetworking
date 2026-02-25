@@ -1,0 +1,5 @@
+framework module AFNetworkingUI {
+    umbrella header "UIKit+AFNetworking.h"
+    export *
+    module * { export * }
+}
